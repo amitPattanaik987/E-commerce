@@ -17,7 +17,7 @@ export default function ShopContextProvider(props) {
     const [all_product, setall_product] = useState([]);
     const [cartItems, setcartItems] = useState(getDefaultCart());
     const [count, setcount] = useState(0);
-    const url="http://localhost:5000"
+    const url="https://e-commerce-2-0zxi.onrender.com"
 
     useEffect(() => {
         let sum = 0;
@@ -32,14 +32,14 @@ export default function ShopContextProvider(props) {
 
 
     useEffect(() => {
-        fetch("http://localhost:5000/allproducts")
+        fetch("https://e-commerce-2-0zxi.onrender.com/allproducts")
             .then((res) => res.json())
             .then((data) => {
                 setall_product(data)
             })
 
         if (localStorage.getItem("auth-token")) {
-            fetch("http://localhost:5000/getcart",{
+            fetch("https://e-commerce-2-0zxi.onrender.com/getcart",{
                 method: "POST",
                 headers: {
                     Accept: "application/form-data",
@@ -61,7 +61,7 @@ export default function ShopContextProvider(props) {
 
         setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
         if (localStorage.getItem("auth-token")) {
-            fetch("http://localhost:5000/addtocart", {
+            fetch("https://e-commerce-2-0zxi.onrender.com/addtocart", {
                 method: "POST",
                 headers: {
                     Accept: "application/formData",
@@ -78,7 +78,7 @@ export default function ShopContextProvider(props) {
         setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
 
         if (localStorage.getItem("auth-token")) {
-            fetch("http://localhost:5000/removefromcart", {
+            fetch("https://e-commerce-2-0zxi.onrender.com/removefromcart", {
                 method: "POST",
                 headers: {
                     Accept: "application/formData",
