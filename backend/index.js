@@ -1,4 +1,4 @@
-const port = 4000;
+const port = 5000;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -6,7 +6,9 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const { error } = require("console");
+const stripe = require("stripe")(
+  "sk_test_51Pt1NCGwu7WfDqJU5XLyZyNP7kPYM4aADSWhpy5V93F5pxoQBGB8k6WqMnE7jw9EUzulZiDcxuUu2PtshWGi8Lyv00b0wuPOYx"
+);
 
 app.use(express.json());
 app.use(cors());
@@ -236,15 +238,15 @@ app.get("/popularinwomen", async (req, res) => {
 
 //creating end points for fetching related products
 
-app.post("/relatedproducts",async(req,res)=>{
-  const {category}=req.body;
-  console.log(category+" related products");
+app.post("/relatedproducts", async (req, res) => {
+  const { category } = req.body;
+  console.log(category + " related products");
   let products = await Product.find({ category: category });
   let popularincategory = products.slice(0, 4);
   console.log("Related products fetched");
   res.send(popularincategory);
   console.log(popularincategory);
-})
+});
 
 //creating middleware to fetch user
 
@@ -306,6 +308,39 @@ app.post("/getcart", fetchUser, async (req, res) => {
   let userdata = await Users.findOne({ _id: req.user.id });
 
   res.json(userdata.cartData);
+});
+
+//payment section
+
+app.post("/payment", async (req, res) => {
+  const price = req.body;
+  console.log(price);
+
+  const lineitems = [
+    {
+      price_data: {
+        currency: "inr",
+        product_data: {
+          name: "Your Product Name", // Replace with your actual product name
+        },
+        unit_amount: Math.round(price.product * 100), // Stripe expects amount in cents/paise
+      },
+      quantity: 1, // You can adjust the quantity as needed
+    },
+  ];
+  
+
+  const session = await stripe.checkout.sessions.create({
+    // payment_methods_types:["card"],
+    line_items: lineitems,
+    mode: "payment",
+    success_url: "http://localhost:5173/success",
+    cancel_url: "http://localhost:5173/cancel",
+  });
+
+
+
+  res.json({id:session.id})
 });
 
 app.listen(port, (err) => {

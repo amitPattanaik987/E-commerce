@@ -6,7 +6,7 @@ import { ShopContext } from '../../context/ShopContext'
 
 export default function ProductDisplay({ product }) {
   const { addtoCart } = useContext(ShopContext);
-  const url="https://e-commerce-backend-2iit.onrender.com"
+  const url="http://localhost:5000"
 
   return (
     <div className='productdisplay'>
