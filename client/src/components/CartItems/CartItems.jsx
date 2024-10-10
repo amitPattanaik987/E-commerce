@@ -15,7 +15,7 @@ export default function CartItems() {
         console.log("stripe funct");
 
         const body = {
-            product: 12500
+            product: 84.03 * getTotalcartAmount()
         }
         console.log(body);
 
