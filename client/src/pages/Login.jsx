@@ -27,7 +27,7 @@ export default function Login() {
 
     console.log("login");
     let responsedata;
-    await fetch("https://e-commerce-2-0zxi.onrender.com/login", {
+    await fetch("https://e-commerce-hat0.onrender.com/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -60,7 +60,7 @@ export default function Login() {
 
     console.log("signup");
     let responsedata;
-    await fetch("https://e-commerce-2-0zxi.onrender.com/signup", {
+    await fetch("https://e-commerce-hat0.onrender.com/signup", {
       method: "POST",
       headers: {
         Accept: "application/json",
