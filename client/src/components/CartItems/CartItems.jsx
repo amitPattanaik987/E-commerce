@@ -22,7 +22,7 @@ export default function CartItems() {
         const headers = {
             "Content-Type": "application/json"
         }
-        const response = await fetch("https://e-commerce-hat0.onrender.com/payment", {
+        const response = await fetch("https://e-commerce-2-0zxi.onrender.com/payment", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)
