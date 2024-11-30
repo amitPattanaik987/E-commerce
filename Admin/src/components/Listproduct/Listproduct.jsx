@@ -8,7 +8,7 @@ export default function Listproduct() {
   const url="https://e-commerce-2-0zxi.onrender.com";
 
   const fetchinfo = async () => {
-    await fetch("https://e-commerce-hat0.onrender.com/allproducts")
+    await fetch("https://e-commerce-2-0zxi.onrender.com/allproducts")
       .then((res) => res.json())
       .then((data) => setallproducts(data))
   }
@@ -18,7 +18,7 @@ export default function Listproduct() {
   }, [])
 
   const remove_Product=async(id)=>{
-    await fetch("https://e-commerce-hat0.onrender.com/removeproduct",{
+    await fetch("https://e-commerce-2-0zxi.onrender.com/removeproduct",{
       method:"POST",
       headers:{
         Accept:"application/json",
